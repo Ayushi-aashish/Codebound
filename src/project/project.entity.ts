@@ -7,7 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Account } from '../../account/models/account.entity';
+import { Account } from '../account/models/account.entity';
 
 export enum ProjectProgress {
   NOT_STARTED = 'not_started',
