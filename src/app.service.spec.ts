@@ -1,24 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-describe('AppController', () => {
-  let controller: AppController;
+describe('AppService', () => {
   let service: AppService;
 
   beforeEach(async () => {
     const testModule: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
       providers: [AppService],
     }).compile();
 
-    controller = testModule.get<AppController>(AppController);
     service = testModule.get<AppService>(AppService);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
   });
 
   describe('getWelcomeInfo', () => {
     it('should return greeting and app status', () => {
-      const result = controller.getWelcomeInfo();
+      const result = service.getWelcomeInfo();
       expect(result).toEqual({
         greeting: 'Welcome to the Project Management API',
         appStatus: 'operational',
@@ -28,9 +28,10 @@ describe('AppController', () => {
 
   describe('getSystemStatus', () => {
     it('should return operational status with timestamp', () => {
-      const result = controller.getSystemStatus();
+      const result = service.getSystemStatus();
       expect(result.operational).toBe('yes');
       expect(result.checkedAt).toBeDefined();
+      expect(typeof result.checkedAt).toBe('string');
     });
   });
 });
